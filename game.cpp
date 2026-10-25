@@ -21,6 +21,35 @@ void printHUD() {
 // ------------------------------------------------------------
 // [МЕСТО ДЛЯ ФУНКЦИЙ РАЗРАБОТЧИКОВ ИЗ PULL REQUEST'ОВ]
 // ------------------------------------------------------------
+// Рискованный рейд: примерно 50% успеха и 50% серьёзного урона.
+void dangerousRaid() {
+    const int outcome = rand() % 100;
+
+    std::cout << "\n[РЕЙД] Вы отправляетесь в опасную зону...\n";
+
+    if (outcome < 50) {
+        const int points = 200 + rand() % 301;     // От 200 до 500.
+        const int loot = 10 + rand() % 21;         // От 10 до 30 ресурсов.
+
+        score += points;
+        resources += loot;
+
+        std::cout << "[УСПЕХ] Рейд завершён удачно!\n";
+        std::cout << "Вы получили " << points << " очков и " << loot << " ресурсов.\n";
+    } else {
+        const int damage = 30 + rand() % 21;       // От 30 до 50 HP.
+
+        hp -= damage;
+        if (hp < 0) hp = 0;
+
+        std::cout << "[ПРОВАЛ] В рейде вас атаковали!\n";
+        std::cout << "Вы потеряли " << damage << " HP.\n";
+
+        if (hp == 0) {
+            std::cout << "Вы не пережили рейд.\n";
+        }
+    }
+}
 int main() {
 #ifdef _WIN32
     SetConsoleCP(CP_UTF8);
@@ -46,8 +75,7 @@ int main() {
 
         switch (choice) {
             case 1:
-            // [РАЗРАБОТЧИК 1: ПОДКЛЮЧИТ ФУНКЦИЮ РИСКА (ISSUE #1)]
-                std::cout << "\n[!] Модуль риска еще в разработке (Issue #1).\n";
+                dangerousRaid();
                 break;
             case 2:
             // [РАЗРАБОТЧИК 2: ПОДКЛЮЧИТ МОДУЛЬ ОТХИЛА (ISSUE #2)]
