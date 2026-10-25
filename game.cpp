@@ -34,11 +34,15 @@ void bossEncounter() {
     } else if (roll <= 4) {
         int dmg = 40;
         hp -= dmg;
+        if (hp < 0) {
+            hp = 0;
+        }
         std::cout << "ИССУШИТЕЛЬ ПРИЗВАЛ СКЕЛЕТОВ! Ты получаешь " << dmg << " урона.\n";
         std::cout << "Текущее HP: " << hp << "\n";
     } else {
         std::cout << "Ты отступаешь в портал. Бой не окончен, но ты цел.\n";
     }
+}
 
 void restAtCamp() {
     std::cout << "\n--- ТОРГОВЕЦ ---\n";
